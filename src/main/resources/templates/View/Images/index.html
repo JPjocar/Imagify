@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/css/normalize.css">
+        <link rel="stylesheet" href="/css/styles.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+        <title>Imagify</title>
+        <link rel="icon" type="image/x-icon" href="/images/logo.png">
+    </head>
+    <body>
+        <div th:replace="fragments/header :: header"></div>
+        <div id="content">
+            <div class="gallery">
+                <div th:each="image : ${images}">
+                    <img class="img item-img" th:src="@{images/resources/{filename}(filename=${image.filename})}" alt="">
+                    <div class="info-image hidden">
+                        <h1 th:text="${image.title}"></h1>
+                        <p th:text="${image.description}"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        
+        <div id="modal_container" class="modal-container">
+            <div class="modal">
+                <div class="photo-modal">
+                    <div class="ipm content-img">
+                        <img class="show-img" src="" alt="">
+                    </div>
+                    <div class="ipm">
+                        <div class="box-info-img">
+                            <h1 class="title">
+
+                            </h1>
+                            <p class="description">
+
+                            </p>
+                            <button id="btnEdit">Editar</button>
+                            <button id="btnDelete">Eliminar</button>  
+                            <button id="close">X</button>
+                            <!-- <a href="./sukuna.jpg" download="nombre-imagen.jpg" class="download-button">Descargar Imagen</a>  -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <script th:src="@{/js/app.js}"></script>
+    </body>
+</html>

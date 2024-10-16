@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <nav class="navbar" th:fragment="header">
+            <a class="item-bar" th:href="@{/images}">
+                <img class="icon-item-bar icon-logo" th:src="@{/images/logo.png}" alt="">
+                Imagify
+            </a>
+            <div class="item-bar">
+                <input type="text" name="buscar" placeholder="&#128269; Busqueda" id="busqueda">
+            </div>
+            <a class="item-bar" th:href="@{/images/create}">
+                <img class="icon-item-bar" th:src="@{/images/usuario.png}" alt="">
+            </a>
+        </nav>
+    </body>
+</html>
