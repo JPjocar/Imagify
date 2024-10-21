@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/css/normalize.css">
+        <link rel="stylesheet" href="/css/styles.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">  
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+        <title>Imagify</title>
+        <link rel="icon" type="image/x-icon" href="/images/logo.png">
+    </head>
+    <body>
+        
+        <div th:replace="fragments/header :: header"></div>
+        
+
+        <div id="content">
+            <div class="form-content">
+                <form th:action="@{/images}" th:object="${image}" method="POST" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <h1>Create Image</h1>
+                        <img src="./logo.png" alt="" class="form-logo">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="title" placeholder="Enter a title" th:field="*{title}" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="description" placeholder="Enter a description" th:field="*{description}">
+                    </div>
+                    <div class="form-group">
+                        <label for="imageFile" class="btnImage">Select Image</label>
+                        <input type="file" name="imageFile" class="hidden" id="imageFile" required>
+                    </div>         
+                    <button type="submit">Save</button>
+                </form>
+            </div>
+        </div>
+
+
+    </body>
+</html>
