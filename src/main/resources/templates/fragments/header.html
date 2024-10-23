@@ -15,6 +15,9 @@
             <a class="item-bar" th:href="@{/images/create}">
                 <img class="icon-item-bar" th:src="@{/images/usuario.png}" alt="">
             </a>
+            <form method="POST" th:action="@{/logout}">
+                <button type="submit" style="margin-bottom: 0">Exit</button>
+            </form>
         </nav>
     </body>
 </html>

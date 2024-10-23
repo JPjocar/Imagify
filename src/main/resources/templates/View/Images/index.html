@@ -17,17 +17,13 @@
             <div class="gallery">
                 <div th:each="image : ${images}">
                     <img class="img item-img" th:src="@{images/resources/{filename}(filename=${image.filename})}" alt="">
-                    <div class="info-image hidden">
+                    <div class="info-image hidden" th:data-id="${image.id}">
                         <h1 th:text="${image.title}"></h1>
                         <p th:text="${image.description}"></p>
                     </div>
                 </div>
             </div>
         </div>
-        
-        
-        
-        
         <div id="modal_container" class="modal-container">
             <div class="modal">
                 <div class="photo-modal">
@@ -43,15 +39,14 @@
 
                             </p>
                             <button id="btnEdit">Editar</button>
-                            <button id="btnDelete">Eliminar</button>  
+                            <button id="btnDelete"><a href="#" id="deleteImage">Eliminar</a></button>  
                             <button id="close">X</button>
                             <!-- <a href="./sukuna.jpg" download="nombre-imagen.jpg" class="download-button">Descargar Imagen</a>  -->
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        
+        </div>  
         <script th:src="@{/js/app.js}"></script>
     </body>
 </html>

@@ -76,6 +76,12 @@ public class ImageController {
                 e.printStackTrace();
             }
         }
-        return "redirect:images";
+        return "redirect:/images";
+    }
+    
+    @GetMapping("/{id}/delete")
+    public String delete(@PathVariable("id") Long id){
+        this.imageService.delete(id);
+        return "redirect:/images";
     }
 }
