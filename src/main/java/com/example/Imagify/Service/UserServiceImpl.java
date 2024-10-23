@@ -1,9 +1,9 @@
-package com.user.springboot.user.springboot.service;
+package com.example.Imagify.Service;
 import com.example.Imagify.DTO.UserRegisterDTO;
 import com.example.Imagify.Model.Role;
 import com.example.Imagify.Model.User;
 import com.example.Imagify.Repository.UserRepository;
-import com.example.Imagify.Service.UserService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
