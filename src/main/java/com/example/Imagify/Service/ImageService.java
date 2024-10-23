@@ -33,4 +33,8 @@ public class ImageService {
     public Optional<Image> get(Long id){
         return this.imageRepository.findById(id);
     }
+    
+    public void delete(Long id){
+        this.imageRepository.deleteById(id);
+    }
 }
