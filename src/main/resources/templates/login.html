@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Login - Imagify</title>
-        <link rel="icon" type="image/x-icon" href="/images/logo.png">
+        <link rel="icon" type="image/x-icon" href="/imgs/logo.png">
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <link rel="preconnect" href="https://fonts.googleapis.com">  
@@ -21,7 +21,7 @@
                 <div class="col-md-6-col-md-offset-3 form-container">
                     <h1>BIENVENIDO</h1>
                     <div class="icon-welcome">
-                        <img src="{@/images/logo.png}" alt="Icon" width="50px">
+                        <img th:src="@{/imgs/logo.png}" alt="Icon" width="50px">
                     </div>
                     <p class="subtitulo">Inicia sesión en tu cuenta.</p>
                     <form th:action="@{/login}" method="post">
@@ -60,7 +60,7 @@
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
         <footer class="footer">    
-            <img src="/images/logo.png" alt="Logo" class="footer-logo">
+            <img src="/imgs/logo.png" alt="Logo" class="footer-logo">
             <p>Imagify.com <br> Copyright © 2024 All rights reserved</p>
         </footer>
     </body>

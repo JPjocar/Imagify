@@ -1,43 +1,68 @@
-
-
 const inputImg = document.getElementById("imageFile");
 const showImgInput = document.getElementById("showImgInput");
 
-
 inputImg.addEventListener("change", (e) => {
     const input = e.target;
-    console.dir(input)
     if(!input.files.length){
         showImgInput.src = "";
         alert("Select a image");
         return;
     }
-    const validators = new ValidatorsImage();
-    validators.add([new ValidatorJPEG(), new ValidatorJPG, new ValidatorPNG])
-    if(!validators.isValid(input.files[0].type)){
-        alert("INVALID FORMAT. FORMAT VALID (JPG, JPEG, PNG)");
-        return;
+    const valid = isValid(input, input.files?.[0]?.type,
+        [new ValidatorJPEG(), new ValidatorJPG, new ValidatorPNG], 
+        "*Este campo no cumple con JPG, JPEG, PNG");
+    
+    if(valid){
+        objectUrl = URL.createObjectURL(input.files[0]);
+        showImgInput.src = objectUrl;
+    }else{
+        showImgInput.src = "";
     }
-    objectUrl = URL.createObjectURL(input.files[0]);
-    showImgInput.src = objectUrl;
+    
 })
 
-class Validator{
-    isValid(value){
-        throw new Error("This method is not avaialible")
+const form = document.getElementById("form-create-image");
+
+form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    if(formValidate(form)){
+        console.log("FORM VALID");
+        form.submit();
+    }else{
+        console.log("FORM NO VALID");
     }
+});
+
+
+function formValidate(form){
+    const title = form.querySelector("#title");
+    const description = form.querySelector("#description");
+    const imgFile = form.querySelector("#imageFile");
+
+    const a = isValid(title, title.value, [new ValidatorRequired()], "*Este campo es requerido")
+    const b = isValid(description, description.value, [new ValidatorRequired()], "*Este campo es requerido")
+    const c = isValid(imgFile, imgFile.files?.[0]?.type,
+        [new ValidatorJPEG(), new ValidatorJPG, new ValidatorPNG], 
+        "*Este campo no cumple con JPG, JPEG, PNG");
+    
+    return a & b & c;
 }
 
-class ValidatorsImage extends Validator{
-    constructor(){
-        super();
-        this.validators = [];
+function isValid(input, value, validators, errorMessage){
+    const valid = validators.some(validator => validator.isValid(value));
+    if(valid){
+        input.nextElementSibling.classList.add("hidden");
+    }else{
+        input.nextElementSibling.classList.remove("hidden");
+        input.nextElementSibling.textContent = errorMessage;
     }
-    add(validatorsUser){
-        this.validators = validatorsUser;
-    }
+    return valid;
+}
+
+
+class ValidatorRequired{
     isValid(value){
-        return this.validators.some(validator => validator.isValid(value))
+        return value.trim();
     }
 }
 
@@ -47,12 +72,14 @@ class ValidatorJPG{
         return false;
     }
 }
+
 class ValidatorPNG{
     isValid(value){
         if(value == "image/png") return true;
         return false;
     }
 }
+
 class ValidatorJPEG{
     isValid(value){
         if(value == "image/jpeg") return true;

@@ -84,7 +84,7 @@ nav{
 }
 
 .gallery{
-    columns: 5 320px;
+    columns: 5 220px;
     column-gap: 1em;
     margin: 100px 0px 10px 0px;
 }
@@ -283,4 +283,9 @@ input{
   width: 100%;
   height: 100%;
   object-fit: contain;
+}
+
+
+.message-error{
+    color: red;
 }
