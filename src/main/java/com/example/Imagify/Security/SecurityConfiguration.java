@@ -1,5 +1,6 @@
 package com.example.Imagify.Security;
 
+import com.google.common.base.Preconditions;
 
 import com.example.Imagify.Service.UserService;
 import org.springframework.context.annotation.Bean;
@@ -16,7 +17,7 @@ public class SecurityConfiguration {
     private UserService userService;
 
     public SecurityConfiguration(UserService userService) {
-        this.userService = userService;
+        this.userService = Preconditions.checkNotNull(userService, "UserService no puede ser nulo");
     }
 
     @Bean
