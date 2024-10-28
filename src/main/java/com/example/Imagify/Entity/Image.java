@@ -9,14 +9,18 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- *
- * @author Dev
+ * Representa la tabla images almacenada en la base de datos.
+ * @author Jocar
+ * @version 1.0
+ * @since 1.1
  */
+ 
 @Entity
 @Data
 @AllArgsConstructor
@@ -30,4 +34,5 @@ public class Image {
     private String title;
     private String description;
     private String url;
+    private LocalDate upload_date;
 }
