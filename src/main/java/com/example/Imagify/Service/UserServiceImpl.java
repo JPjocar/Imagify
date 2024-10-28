@@ -3,6 +3,7 @@ import com.example.Imagify.DTO.UserRegisterDTO;
 import com.example.Imagify.Model.Role;
 import com.example.Imagify.Model.User;
 import com.example.Imagify.Repository.UserRepository;
+import com.example.Imagify.Validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -46,8 +47,22 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public User save(UserRegisterDTO registerDTO) {
-        User user = new User(registerDTO.getNombre(),
-                registerDTO.getEmail(), passwordEncoder.encode(registerDTO.getPassword()), Arrays.asList(new Role("ROLE_USER")));
+        
+        if (!UserValidator.isValidName(registerDTO.getNombre())) {
+            throw new IllegalArgumentException("Nombre inválido. Debe contener solo letras y tener al menos 3 caracteres.");
+        } 
+        if (!UserValidator.isValidEmail(registerDTO.getEmail())) {
+            throw new IllegalArgumentException("Email no válido.");
+        }
+        if (!UserValidator.isValidPassword(registerDTO.getEmail())) {
+            throw new IllegalArgumentException("La contraseña debe ser alfanumérica y tener al menos 8 caracteres.");
+        }
+        
+        User user = new User(
+                registerDTO.getNombre(),
+                registerDTO.getEmail(), 
+                passwordEncoder.encode(registerDTO.getPassword()), 
+                Arrays.asList(new Role("ROLE_USER")));
         return userRepository.save(user);
     }
 
@@ -64,7 +79,10 @@ public class UserServiceImpl implements UserService {
         if (user == null) {
             throw new UsernameNotFoundException("Usuario o password inválidos");
         }
-        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), mappingAuthoritiesRoles(user.getRoles()));
+        return new org.springframework.security.core.userdetails.User(
+                user.getEmail(), 
+                user.getPassword(), 
+                mappingAuthoritiesRoles(user.getRoles()));
     }
 
     /**
@@ -74,7 +92,9 @@ public class UserServiceImpl implements UserService {
      * @return Una colección de autoridades concedidas.
      */
     private Collection<? extends GrantedAuthority> mappingAuthoritiesRoles(Collection<Role> roles) {
-        return roles.stream().map(role -> new SimpleGrantedAuthority(role.getNombre())).collect(Collectors.toList());
+        return roles.stream()
+                .map(role -> new SimpleGrantedAuthority(role.getNombre()))
+                .collect(Collectors.toList());
     }
 
 }

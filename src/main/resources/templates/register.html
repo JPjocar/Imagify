@@ -27,17 +27,28 @@
                         <img th:src="@{/imgs/logo.png}" alt="Icon" width="50px">
                     </div>
                     <form th:action="@{/register}" method="post" th:object="${user}">
+                        <!--Validación del nombre-->
                         <div class="form-group">
                             <label class="control-label" for="nombre">Usuario </label>
-                            <input id="nombre" type="text" class="form-control input-form-log" th:field="*{nombre}" required autofocus="autofocus">
+                            <input id="nombre" type="text" class="form-control input-form-log" th:field="*{nombre}" 
+                                   required pattern="[A-Za-z\s]{3,}" tittle="El nombre debe contener solo letras y al menos 3 caracteres"
+                                   autofocus="autofocus">
+                            <div th:if="${#fields.hasErrors('nombre')}" class="error" th:errors="{nombre}">Nombre inválido.</div> 
                         </div>
+                        <!--Validación del email-->
                         <div class="form-group">
                             <label class="control-label" for="email">Email </label>
-                            <input id="email" type="email" class="form-control input-form-log" th:field="*{email}" required autofocus="autofocus">
+                            <input id="email" type="email" class="form-control input-form-log" th:field="*{email}" 
+                                   required pattern="^[\w.%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$" tittle="Ingrese un email válido"
+                                   autofocus="autofocus">
                         </div>
+                        <!--Validación de la contraseña -->
                         <div class="form-group">
                             <label class="control-label" for="password">Contraseña  </label>
-                            <input id="password" type="password" class="form-control input-form-log" th:field="*{password}" required autofocus="autofocus">
+                            <input id="password" type="password" class="form-control input-form-log" th:field="*{password}" 
+                                   required pattern=".{8,}" title="La contraseña debe tener al menos 8 caracteres"
+                                   autofocus="autofocus">
+                            <div th:if="${#fields.hasErrors('password')}" class="error" th:errors="{password}">Contraseña no válida.</div> 
                         </div>
 
                         <div class="form-group btns-help">

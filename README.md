@@ -1,3 +1,5 @@
 CASOS DE USO
 
-![WhatsApp Image 2024-10-20 at 9 42 51 PM](https://github.com/user-attachments/assets/b3d0b9ac-6bc7-461a-93a4-fcfa7fa9d87c)
+40% de CASOS DE USO
+
+![casos de uso 40](https://github.com/user-attachments/assets/9951b671-0000-454e-bbbe-0a12325d17f7)
