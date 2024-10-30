@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.example.Imagify"},{"l":"com.example.Imagify.Controller"},{"l":"com.example.Imagify.DTO"},{"l":"com.example.Imagify.Entity"},{"l":"com.example.Imagify.Model"},{"l":"com.example.Imagify.Repository"},{"l":"com.example.Imagify.Security"},{"l":"com.example.Imagify.Service"}];updateSearchResults();

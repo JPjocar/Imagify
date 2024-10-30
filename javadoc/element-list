@@ -1,0 +1,8 @@
+com.example.Imagify
+com.example.Imagify.Controller
+com.example.Imagify.DTO
+com.example.Imagify.Entity
+com.example.Imagify.Model
+com.example.Imagify.Repository
+com.example.Imagify.Security
+com.example.Imagify.Service
