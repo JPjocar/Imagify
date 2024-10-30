@@ -1,6 +1,6 @@
-
 .form-container{
-    background-color: white;
+    background-color: rgba(15, 21, 35, 1);
+    color: white;
     padding: 40px;
     border-radius: 5px;
     box-shadow: black 5px 5px 20px;
@@ -9,11 +9,11 @@
     text-align: center;
     font-weight: bold;
     font-size: 24px;
-    color: #333;
+    color: white;
 }
 .subtitulo {
     font-size: 18px;
-    color: #666;
+    color: #f0f0f0;
     margin-bottom: 20px;
     text-align: center;
 }
@@ -23,21 +23,22 @@ body{
     padding-bottom: 100px;
     font-family: "Source Code Pro", serif;
     font-optical-sizing: auto;
-    background-color: #f5f5f5;
+    background-color: rgba(15, 21, 35, 1);
+    color: white;
     font-weight: 600;
 }
 .footer{
     position: absolute;
     bottom: 0;
     width: 100%;
-    background-color: #343a40;
+    background-color: #151618;
     color: white;
     text-align: center;
     padding: 10px 0;
     margin-top: auto;
 }
 .footer-logo {
-    width: 40px;
+    width: 20px;
     height: auto;
     margin-bottom: 10px;
 }
@@ -56,9 +57,11 @@ body{
 .input-form-log{
     border: none;
     outline: none;
-    border-bottom: 2px solid #474747;
+    border-bottom: 2px solid #666666;
     margin-bottom: 20px;
     padding: 8px 0;
+    background-color: rgba(15, 21, 35, 1);
+    color: #f5f5f5;
 }
 .form-container .icon-welcome {
     display: flex;
@@ -70,17 +73,21 @@ body{
     width: 100%;
     text-align: center;
 }
+.btns-help {
+    display: flex;
+    justify-content: center;
+}
 .form-container p {
     text-align: center;
     font-size: 14px;
     color:#666;
 }
 .input-form-log:focus {
-    border-bottom: 2px solid #4d004d;
+    border-bottom: 2px solid #6a0dad;
 }
 /*Botton and links*/
-.btn .btn-login-custom {
-    background-color: #4d004d;
+.btn-login-custom {
+    background-color: #262036;
     border: none;
     color: white;
     font-weight: bold;
@@ -96,15 +103,21 @@ body{
     transition: backgroud-color 0.3s ease;
 }
 .btn-login-custom:hover {
-    background-color: #4d004d;
+    background-color: #460d6e;
     color: white;
 }
 .btn-login-custom i {
     margin-right: 10px;
 }
+.text-center {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
 /*link*/
 .form-container a {
-    color: #4d004d;
+    color: #9223e0;
     font-weight: bold;
     text-decoration: none;
 }
