@@ -6,15 +6,18 @@
     <body>
         <nav class="navbar" th:fragment="header">
             <a class="item-bar" th:href="@{/images}">
-                <img class="icon-item-bar icon-logo" th:src="@{/images/logo.png}" alt="">
+                <img class="icon-item-bar icon-logo" th:src="@{/imgs/logo.png}" alt="">
                 Imagify
             </a>
             <div class="item-bar">
                 <input type="text" name="buscar" placeholder="&#128269; Busqueda" id="busqueda">
             </div>
             <a class="item-bar" th:href="@{/images/create}">
-                <img class="icon-item-bar" th:src="@{/images/usuario.png}" alt="">
+                <img class="icon-item-bar" th:src="@{/imgs/usuario.png}" alt="">
             </a>
+            <form method="POST" th:action="@{/logout}">
+                <button type="submit" style="margin-bottom: 0">Exit</button>
+            </form>
         </nav>
     </body>
 </html>

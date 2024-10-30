@@ -13,35 +13,40 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
         <title>Imagify</title>
-        <link rel="icon" type="image/x-icon" href="/images/logo.png">
+        <link rel="icon" type="image/x-icon" href="/imgs/logo.png">
     </head>
     <body>
         
         <div th:replace="fragments/header :: header"></div>
-        
 
         <div id="content">
             <div class="form-content">
-                <form th:action="@{/images}" th:object="${image}" method="POST" enctype="multipart/form-data">
+                <form th:action="@{/images}" th:object="${image}" method="POST" enctype="multipart/form-data" id="form-create-image">
                     <div class="form-group">
                         <h1>Create Image</h1>
-                        <img src="./logo.png" alt="" class="form-logo">
+                        <img th:src="@{/imgs/logo.png}" alt="" class="form-logo">
                     </div>
                     <div class="form-group">
-                        <input type="text" id="title" placeholder="Enter a title" th:field="*{title}" required>
+                        <input type="text" id="title" placeholder="Enter a title" th:field="*{title}">
+                        <p class="message-error hidden"></p>
                     </div>
                     <div class="form-group">
                         <input type="text" id="description" placeholder="Enter a description" th:field="*{description}">
+                        <p class="message-error hidden"></p>
                     </div>
+                    <div class="form-group box-img-show">
+                        <img src="" alt="" id="showImgInput">
+                    </div >
                     <div class="form-group">
                         <label for="imageFile" class="btnImage">Select Image</label>
-                        <input type="file" name="imageFile" class="hidden" id="imageFile" required>
+                        <input type="file" name="imageFile" class="hidden" id="imageFile" accept=".png, .jpg, .jpeg">
+                        <p class="message-error hidden"></p>
                     </div>         
                     <button type="submit">Save</button>
                 </form>
             </div>
         </div>
 
-
+    <script th:src="@{/js/validateCreateImage.js}"></script>
     </body>
 </html>

@@ -4,6 +4,11 @@ import jakarta.persistence.*;
 
 import java.util.Collection;
 
+
+/**
+ * Entidad que representa un usuario en el sistema y la tabla en la base de datos.
+ * @author Dev
+ */
 @Entity
 @Table(name = "usuarios", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 
