@@ -19,36 +19,37 @@
         <div class="container container-form-p">
             <div class="row">
                 <div class="col-md-6-col-md-offset-3 form-container">
-                    <h1>BIENVENIDO</h1>
+                    <h1>WELCOME</h1>
                     <div class="icon-welcome">
-                        <img src="/images/logo.png" alt="Icon" width="50px">
+                        <img src="/imgs/logo.png" alt="Icon" width="50px">
                     </div>
-                    <p class="subtitulo">Inicia sesión en tu cuenta.</p>
+                    <p class="subtitulo">Sign in to your account.</p>
                     <form th:action="@{/login}" method="post">
                         <div th:if="${param.error}">
-                            <div class="alert alert-danger">Usuario o contraseña inválidos.</div>
+                            <div class="alert alert-danger">Invalid user or password.</div>
                         </div>
                         <div th:if="${param.Logout}">
-                            <div class="alert alert-info">Ha cerrado sesión con éxito.</div>
+                            <div class="alert alert-info">You have successfully logged out.</div>
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label" for="username">Usuario </label>
+                            <label class="control-label" for="username">User </label>
                             <input  id="username" name="username" type="text" class="form-control input-form-log" required autofocus="autofocus">
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="password">Contraseña </label>
+                            <label class="control-label" for="password">Password </label>
                             <input id="password" name="password" type="password" class="form-control input-form-log" required autofocus="autofocus">
                         </div>
 
                         <div class="form-group btns-help">
                             <div class="row">
-                                <div class="col-md-6-col-md-offset-3">
-                                    <input type="submit" class="btn btn-login-custom" id="Login-submit" value="INICIAR SESIÓN"></input>
+                                <div class="text-center">
+                                    <input type="submit" class="btn btn-login-custom" id="Login-submit" value="LOGIN">
+                                    <br>
                                 </div>
                                 <div class="form-group">
                                     <span>
-                                        ¿No tienes cuenta?<a th:href="@{/register}"> Regístrate aquí.</a>
+                                        Don't have an account?<a th:href="@{/register}"> Sign up here.</a>
                                     </span>
                                 </div>
                             </div>
@@ -57,11 +58,10 @@
                 </div>
             </div>
         </div>
-        <!-- Latest compiled and minified JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
         <footer class="footer">    
-            <img src="/imgs/logo.png" alt="Logo" class="footer-logo">
-            <p>Imagify.com <br> Copyright © 2024 All rights reserved</p>
+            <p>Imagify.com <img src="/imgs/logo.png" alt="Logo" class="footer-logo"> 
+                <br> Copyright © 2024 All rights reserved</p>
         </footer>
     </body>
 </html>
