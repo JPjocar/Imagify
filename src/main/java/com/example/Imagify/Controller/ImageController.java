@@ -14,6 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -63,9 +66,19 @@ public class ImageController {
      */
     @GetMapping("/create")
     public String create(Model model){
+        String username = getCurrentUsername();
+        model.addAttribute("username", username);
         Image image = new Image();
         model.addAttribute("image", image);
         return "View/Images/create";
+    }
+    
+    public String getCurrentUsername(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.getPrincipal() instanceof User) {
+            return ((User) authentication.getPrincipal()).getUsername();
+        }
+        return null;
     }
     /**
      * Este metodo sirve para generar un recurso de una imagen determinada por el filename
