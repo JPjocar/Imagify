@@ -289,3 +289,13 @@ input{
 .message-error{
     color: red;
 }
+
+.info-user > img{
+    width: 100%;
+    height: 100px;
+    object-fit: contain;
+}
+.info-user > h1 {
+    text-align: center;
+    color: white;
+}

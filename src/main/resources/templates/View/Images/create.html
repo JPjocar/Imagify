@@ -20,6 +20,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         <div th:replace="fragments/header :: header"></div>
 
         <div id="content">
+            <div class="info-user">
+                <img src="/imgs/usuario.png">
+                <h1 th:text="${username}"></h1>
+            </div>
+            
             <div class="form-content">
                 <form th:action="@{/images}" th:object="${image}" method="POST" enctype="multipart/form-data" id="form-create-image">
                     <div class="form-group">
