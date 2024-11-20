@@ -47,5 +47,8 @@ public class Image {
     @JoinColumn(name = "user_id")
     private User user;
     
+    @ManyToOne(targetEntity = Category.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "category_id")
+    private Category category;
    
 }
