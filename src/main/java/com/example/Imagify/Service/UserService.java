@@ -17,4 +17,7 @@ public interface UserService extends UserDetailsService {/**
      * @return El usuario guardado.
      */
     public User save(UserRegisterDTO registerDTO);
+    public User update(UserRegisterDTO registerDTO);
+    
+    public UserRegisterDTO getCurrentUserDTO();
 }
