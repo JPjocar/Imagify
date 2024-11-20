@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <div class="nav-user" th:fragment="nav-user">
+                <div class="item-nav-user"><a th:href="@{/images/create}" class="a-item-nav-user">Create</a></div>
+                <div class="item-nav-user"><a th:href="@{/images/private}" class="a-item-nav-user">Private</a></div>
+                <div class="item-nav-user"><a th:href="@{/images/public}" class="a-item-nav-user">Public</a></div>
+                <div class="item-nav-user"><a href="" class="a-item-nav-user">Categorias</a></div>
+        </div>
+    </body>
+</html>

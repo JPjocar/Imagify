@@ -1,8 +1,10 @@
 package com.example.Imagify.Model;
 
+import com.example.Imagify.Entity.Image;
 import jakarta.persistence.*;
 
 import java.util.Collection;
+import java.util.List;
 
 
 /**
@@ -30,7 +32,10 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
     )
     private Collection<Role> roles;
-
+    
+    @OneToMany(targetEntity = Image.class, cascade = CascadeType.ALL, mappedBy = "user",fetch = FetchType.EAGER)
+    private List<Image> images;
+    
     public Long getId() {
         return id;
     }

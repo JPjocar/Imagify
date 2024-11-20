@@ -7,10 +7,14 @@ package com.example.Imagify.Service;
 import com.example.Imagify.Entity.Image;
 import com.example.Imagify.Repository.ImageBasicDetails;
 import com.example.Imagify.Repository.ImageRepository;
+import com.example.Imagify.Repository.UserRepository;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -28,6 +32,8 @@ public abstract class ImageService implements CRUDImageService, UploadImageServi
     @Autowired
     protected ImageRepository imageRepository;
     
+    @Autowired
+    protected UserRepository userRepository;
     /**
      * Guarda una imagen en la base de datos y en el sistema de archivos.
      *
@@ -61,6 +67,10 @@ public abstract class ImageService implements CRUDImageService, UploadImageServi
         return this.imageRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
     }  
     
+    public List<Image> getAllPublicImages(){
+        return this.imageRepository.getAllPublicImages();
+    }
+    
     /**
      * Obtiene una imagen específica por su identificador.
      *
@@ -72,6 +82,25 @@ public abstract class ImageService implements CRUDImageService, UploadImageServi
         return this.imageRepository.findById(id);
     }  
     
+    public List<Image> getPrivateImagesByUser(){
+        Long id_user = this.getIdUserSession();        
+        return this.imageRepository.getPrivateImagesByUser(id_user);
+    }
+    
+    public List<Image> getPublicImagesByUser(){
+        Long id_user = this.getIdUserSession();  
+        return this.imageRepository.getPublicImagesByUser(id_user);
+    }
+    
+    
+    public Long getIdUserSession(){
+        String username = "";
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.getPrincipal() instanceof User) {
+            username = ((User) authentication.getPrincipal()).getUsername();
+        }
+        return this.userRepository.findByEmail(username).getId();
+    }
     /**
      * Elimina una imagen específica por su identificador.
      *

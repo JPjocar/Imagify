@@ -19,11 +19,16 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         
         <div th:replace="fragments/header :: header"></div>
 
+        
+        
         <div id="content">
+            
             <div class="info-user">
                 <img src="/imgs/usuario.png">
                 <h1 th:text="${username}"></h1>
             </div>
+            
+            <div th:replace="fragments/nav-user :: nav-user"></div>
             
             <div class="form-content">
                 <form th:action="@{/images}" th:object="${image}" method="POST" enctype="multipart/form-data" id="form-create-image">
@@ -46,7 +51,17 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                         <label for="imageFile" class="btnImage">Select Image</label>
                         <input type="file" name="imageFile" class="hidden" id="imageFile" accept=".png, .jpg, .jpeg">
                         <p class="message-error hidden"></p>
-                    </div>         
+                    </div>    
+                    <div class="form-group">
+                        <label>Privacidad: </label>
+                        <label>
+                            <input type="radio" th:field="*{visibility}" value="private"> Privado 
+                        </label>
+                        <label>
+                            <input type="radio" th:field="*{visibility}" value="public"> Publico 
+                        </label>
+                    </div>
+
                     <button type="submit">Save</button>
                 </form>
             </div>
