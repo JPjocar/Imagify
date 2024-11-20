@@ -3,6 +3,7 @@ import com.example.Imagify.Entity.Image;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 
@@ -22,6 +23,17 @@ public interface ImageRepository extends JpaRepository<Image, Long>{
      */
     @Query("SELECT u FROM Image u WHERE u.id = :id")
     public ImageBasicDetails findImageBasicDetailsById(Long id);
+    
+    
+    @Query("SELECT u FROM Image u WHERE u.visibility='public' ORDER BY u.id DESC")
+    public List<Image> getAllPublicImages();
+    
+    @Query("SELECT u FROM Image u WHERE u.visibility='private' AND u.user.id = :id_user ORDER BY u.id DESC")
+    public List<Image> getPrivateImagesByUser(@Param("id_user") Long id_user);
+    
+    
+    @Query("SELECT u FROM Image u WHERE u.visibility='public' AND u.user.id = :id_user ORDER BY u.id DESC")
+    public List<Image> getPublicImagesByUser(@Param("id_user") Long id_user);
     
     /**
      * Obtiene una lista de los detalles básicos de todas las imágenes.
