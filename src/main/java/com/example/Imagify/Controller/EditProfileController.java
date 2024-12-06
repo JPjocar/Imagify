@@ -47,7 +47,6 @@ public class EditProfileController {
         this.userService.save(userDTO);
         return "redirect:/profile/update";
     }
-    
 
     
 }

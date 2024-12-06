@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.stream.Collectors;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
  * Implementación del servicio de usuarios para manejar operaciones relacionadas con la entidad User.
@@ -22,9 +24,9 @@ import java.util.stream.Collectors;
  */
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService{
 
-    @Autowired
+   @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
     private UserRepository userRepository;
@@ -96,8 +98,6 @@ public class UserServiceImpl implements UserService {
                 .map(role -> new SimpleGrantedAuthority(role.getNombre()))
                 .collect(Collectors.toList());
     }
-<<<<<<< Updated upstream
-=======
     
     
     
@@ -153,6 +153,4 @@ public class UserServiceImpl implements UserService {
     private boolean isValidEmail(String email) {
         return email != null && email.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
     }
->>>>>>> Stashed changes
-
 }

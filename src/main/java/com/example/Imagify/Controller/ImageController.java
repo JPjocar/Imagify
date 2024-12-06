@@ -4,22 +4,17 @@
  */
 package com.example.Imagify.Controller;
 
-<<<<<<< Updated upstream
-=======
+
 import com.example.Imagify.DTO.UserRegisterDTO;
 import com.example.Imagify.Entity.Category;
->>>>>>> Stashed changes
 import com.example.Imagify.Entity.Image;
 import com.example.Imagify.Entity.Tag;
-import com.example.Imagify.Repository.ImageRepository;
 import com.example.Imagify.Repository.UserRepository;
+import com.example.Imagify.Service.CategoryService;
 import com.example.Imagify.Service.ImageService;
 import com.example.Imagify.Service.StorageService;
 import com.example.Imagify.Service.TagService;
 import com.example.Imagify.Service.UserService;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,13 +26,17 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+
+import org.springframework.web.bind.annotation.PathVariable;
+
+import org.springframework.web.bind.annotation.GetMapping;
+
+import java.util.List;
 
 /**
  * Esta clase administra la solicitudes HTPP de las imagenes
@@ -58,14 +57,11 @@ public class ImageController {
     @Autowired
     private UserRepository userRepository;
     
-<<<<<<< Updated upstream
-=======
     @Autowired
     private UserService userService;
     
     @Autowired
     private CategoryService categoryService;
->>>>>>> Stashed changes
     
     @Autowired
     private StorageService storageService;
@@ -133,14 +129,10 @@ public class ImageController {
     public String create(Model model){
         String username = getCurrentUsername();
         model.addAttribute("username", username);
-<<<<<<< Updated upstream
-
-=======
         List<Category> categories = this.categoryService.getAll();
         model.addAttribute("categories", categories);
         List<Tag> tags = this.tagService.getAll();
         model.addAttribute("tags", tags);
->>>>>>> Stashed changes
         Image image = new Image();
         model.addAttribute("image", image);
         return "View/Images/create";
@@ -249,8 +241,6 @@ public class ImageController {
         logger.info("Se ha eliminado una imagen con filename={}", filename);
         return "redirect:/images";
     }
-<<<<<<< Updated upstream
-=======
     
     @GetMapping("/categories")
     public String categories(Model model){
@@ -301,5 +291,4 @@ public class ImageController {
         return "redirect:/images/perfil/edit";
     }
     
->>>>>>> Stashed changes
 }

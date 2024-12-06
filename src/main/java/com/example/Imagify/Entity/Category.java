@@ -17,14 +17,17 @@ import java.time.LocalDate;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 /**
  *
  * @author Dev
  */
-@Data
+
 @Entity
+@Data
+@Getter
 @Table(name = "categories")
 @AllArgsConstructor
 @NoArgsConstructor

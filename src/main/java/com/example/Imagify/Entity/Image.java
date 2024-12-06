@@ -49,12 +49,9 @@ public class Image {
     @JoinColumn(name = "user_id")
     private User user;
     
-<<<<<<< Updated upstream
-=======
     @ManyToOne(targetEntity = Category.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id")
     private Category category;
->>>>>>> Stashed changes
    
     @ManyToMany(targetEntity = Tag.class, fetch = FetchType.LAZY)
     private List<Tag> tags;
