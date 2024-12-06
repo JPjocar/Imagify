@@ -1,5 +1,5 @@
 CASOS DE USO
 
-40% de CASOS DE USO
+80% de CASOS DE USO
 
-![casos de uso 40](https://github.com/user-attachments/assets/9951b671-0000-454e-bbbe-0a12325d17f7)
+![Diseño sin título](https://github.com/user-attachments/assets/2c53d7fc-1217-46fa-af2a-c3a93b32bccf)
