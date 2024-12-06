@@ -1,8 +1,6 @@
 package com.example.Imagify;
 
-import com.example.Imagify.DTO.UserRegisterDTO;
-import com.example.Imagify.Model.Role;
-import com.example.Imagify.Model.User;
+
 import com.example.Imagify.Repository.UserRepository;
 import com.example.Imagify.Service.UserServiceImpl;
 
@@ -73,4 +71,5 @@ public class UserServiceImplTest {
 //        assertThrows(UsernameNotFoundException.class, () -> userService.loadUserByUsername(
 //                "unknown@example.com"));
 //    }
+    
 }

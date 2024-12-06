@@ -9,12 +9,14 @@ import com.example.Imagify.DTO.UserRegisterDTO;
 import com.example.Imagify.Entity.Category;
 import com.example.Imagify.Entity.Image;
 import com.example.Imagify.Entity.Tag;
+import com.example.Imagify.Model.Role;
 import com.example.Imagify.Repository.UserRepository;
 import com.example.Imagify.Service.CategoryService;
 import com.example.Imagify.Service.ImageService;
 import com.example.Imagify.Service.StorageService;
 import com.example.Imagify.Service.TagService;
 import com.example.Imagify.Service.UserService;
+import java.util.Arrays;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +39,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
  * Esta clase administra la solicitudes HTPP de las imagenes
@@ -68,6 +71,9 @@ public class ImageController {
     
     @Autowired
     private TagService tagService;
+    
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
      
     /**
      * Este metodo sirve para mostrar la lista de imagenes
@@ -283,11 +289,14 @@ public class ImageController {
             username = ((User) authentication.getPrincipal()).getUsername();
         }
         com.example.Imagify.Model.User user = this.userRepository.findByEmail(username);
-
-        userRegisterDTO.setId(user.getId());
-        System.out.println(userRegisterDTO.getNombre());
-        this.userRepository.deleteById(user.getId());
-        this.userService.save(userRegisterDTO);
+        System.out.println(user.getId());
+            user.setNombre(userRegisterDTO.getNombre());
+            if(!userRegisterDTO.getPassword().equals("")){
+                user.setPassword(passwordEncoder.encode(userRegisterDTO.getPassword()));
+            }     
+            this.userRepository.save(user);
+        
+        
         return "redirect:/images/perfil/edit";
     }
     
