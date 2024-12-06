@@ -14,18 +14,20 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 /**
  *
  * @author Dev
  */
-@Data
+
 @Entity
+@Data
+@Getter
 @Table(name = "categories")
 @AllArgsConstructor
 @NoArgsConstructor
@@ -37,14 +39,6 @@ public class Category {
     private String description;
     private LocalDate creation_date;
     
-    @OneToMany(targetEntity = Image.class, cascade = CascadeType.ALL, mappedBy = "category",fetch = FetchType.EAGER)
+    @OneToMany(targetEntity = Image.class, mappedBy = "category",fetch = FetchType.EAGER)
     private List<Image> images;
-
-    public Category(long l, String category_1) {
-        this.id = id;
-        this.name = name;
-        this.description = null; 
-        this.creation_date = LocalDate.now(); 
-        this.images = new ArrayList<>();
-    }
 }

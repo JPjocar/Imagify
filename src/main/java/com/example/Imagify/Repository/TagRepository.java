@@ -4,8 +4,10 @@
  */
 package com.example.Imagify.Repository;
 
-import com.example.Imagify.Entity.Category;
+import com.example.Imagify.Entity.Tag;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Repository;
  * @author Dev
  */
 @Repository
-public interface CategoryRepository extends JpaRepository<Category, Long>{
-
+public interface TagRepository extends JpaRepository<Tag, Long>{
+    @Query("SELECT u FROM Tag u ORDER BY u.id DESC")
+    public List<Tag> getAllDesc();
 }

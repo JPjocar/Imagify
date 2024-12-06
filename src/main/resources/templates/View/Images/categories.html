@@ -4,85 +4,48 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/css/normalize.css">
+        <link rel="stylesheet" href="/css/styles.css">
+        <link rel="stylesheet" href="/css/styleU.css">
+        <link rel="stylesheet" href="/css/stylesbl.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">  
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
-        <title>Your Profile - Imagify</title>
+        <title>Imagify</title>
         <link rel="icon" type="image/x-icon" href="/imgs/logo.png">
-        <link href="/css/styleProfile.css" rel="stylesheet">
-        <link href="/css/stylesbl.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" 
-              integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" 
-              crossorigin="anonymous" referrerpolicy="no-referrer" />
     </head>
     <body>
-        <nav class="navbar" th:fragment="header">
-            <a class="item-bar" th:href="@{/images}">
-                <img class="icon-item-bar icon-logo" src="@{/imgs/usuario.png}" alt="">
-                Imagify
-            </a>
-            <div class="item-bar">
-                <input type="text" name="buscar" placeholder="&#128269; Busqueda" id="busqueda">
-            </div>  
-        </nav>
+        <div th:replace="fragments/header :: header"></div>
 
-        <section class="section-profile-user">
-            <div class="profile-user-header">
-                <div class="profile-user-port">
-                    <div class="profile-user-avatar">
-                        <img src="usuario.png" alt="img-avatar">
-                        <button type="button" class="button-avatar">
-                            <i class="far fa-image"></i>
-                        </button>
-                    </div>
+        
+        
+        <div id="content">
+            
+            <div class="info-user">
+                <img src="/imgs/usuario.png">
+                <h1 th:text="${username}"></h1>
+            </div>
+
+            <div th:replace="fragments/nav-user :: nav-user"></div>
+
+            <div class="galeria box-galeria">
+                <div class="info">
+                    <h2 class="title">My Categories</h2> 
                 </div>
+                <!--FOTOS-->
+                <div class="grid-galeria">
+                    <a class="galeria gitem" th:each="category : ${categories}" style="display: block" th:href="@{/images/categories/{id}(id=${category.id})}">
+                        <div class="foto">
+                            <img src="" alt="">
+                        </div>
+                        <div class="pie">
+                            <p class="title-item" th:text="${category.name}"></p> 
+                        </div>
+                    </a>
+                </div>  
             </div>
-            <div class="profile-user-bio">
-                <h3 th:text="${username}" class="titulo"></h3>
-                <div class="button-container">
-                    <button id="editProfileButton" class="edit-profile-button">Edit profile</button>
-                    <div id="editProfileModal" class="modal">
-                        <span id="closeModal" class="close">&times;</span>
-                        <h2>Edit profile</h2>
-                        <form id="editProfileForm">
-                            <div class="form-group">
-                                <label for="username">Username </label>
-                                <input type="text" id="username" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Email </label>
-                                <input type="email" id="email" name="email" required>
-                            </div>
-                        </form>
-                        <button type="submit" class="save-button">Save</button>
-                    </div>
-                    <i class="fa-solid fa-plus"></i>
-                </div>
-            </div>
-        </section>
-        <!--GALERIA-->
-        <div class="galeria box-galeria">
-            <div class="info">
-                <h2 class="title">My Categories</h2> 
-            </div>
-            <!--FOTOS-->
-            <div class="grid-galeria">
-                <a class="galeria gitem" th:each="category : ${categories}" style="display: block" th:href="@{/images/categories/{id}(id=${category.id})}">
-                    <div class="foto">
-                        <img src="" alt="">
-                    </div>
-                    <div class="pie">
-                        <p class="title-item" th:text="${category.name}"></p> 
-                    </div>
-                </a>
-            </div>  
         </div>
-        <script src="@{/js/formprofile.js}" type="text/javascript"></script>
-        <br>
-        <footer class="footer">    
-            <p>Imagify.com <img src="/imgs/logo.png" alt="Logo" class="footer-logo"> 
-                <br> Copyright © 2024 All rights reserved</p>
-        </footer>
+
     </body>
 </html>
 

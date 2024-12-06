@@ -14,13 +14,21 @@
     <body>
         <div th:replace="fragments/header :: header"></div>
         <div id="content">
-            <div class="gallery">
+            
+            <h2 th:if="${buscar}" style="color: white; margin-bottom: 0">Mostrando resultados para <span th:text="${busqueda}" style="color: purple"></span> </h2>
+            
+            <div class="gallery" style="margin-top: 50px">
                 <div th:each="image : ${images}">
-                    <img class="img item-img" th:src="@{images/resources/{filename}(filename=${image.filename})}" alt="">
+                    <img class="img item-img" th:src="@{/images/resources/{filename}(filename=${image.filename})}" alt="">
                     <div class="info-image hidden" th:data-id="${image.id}">
                         <h1 th:text="${image.title}"></h1>
                         <p th:text="${image.description}"></p>
                         <p class="category" th:text="${image.category.name}"></p>
+                        <div class="tags">
+                            <ul>
+                                <li th:each="tag : ${image.tags}" th:text="${tag.name}"></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -41,6 +49,10 @@
                             </p>
                             <div>Categoria: 
                                 <p class="category">
+                                </p>
+                            </div>
+                            <div>Etiquetas: 
+                                <p class="tags">
                                 </p>
                             </div>
 <!--                            <button id="btnEdit">Editar</button>-->

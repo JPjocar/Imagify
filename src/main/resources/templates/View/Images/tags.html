@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/css/normalize.css">
+        <link rel="stylesheet" href="/css/styles.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">  
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+        <title>Imagify</title>
+        <link rel="icon" type="image/x-icon" href="/imgs/logo.png">
+    </head>
+    <body>
+        
+        <div th:replace="fragments/header :: header"></div>
+
+        <div id="content">
+            
+            <div class="info-user">
+                <img src="/imgs/usuario.png">
+                <h1 th:text="${username}"></h1>
+            </div>
+            
+            <div th:replace="fragments/nav-user :: nav-user"></div>
+            
+            <div class="form-content">
+                <form th:action="@{/images/tags}" th:object="${tag}" method="POST" id="form-create-image">
+                    <div class="form-group">
+                        <h1>Create Tag</h1>
+                        <img th:src="@{/imgs/logo.png}" alt="" class="form-logo">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="title" placeholder="Enter a tag" th:field="*{name}">
+                    </div>
+                    <button type="submit">Save</button>
+                </form>
+            </div>
+            
+            <div class="form-content">
+                <label>Etiquetas mas recientes: </label>
+                <ul>
+                    <li th:each="tag : ${tags}" th:text="${tag.name}"></li>
+                </ul>
+            </div>
+            
+        </div>
+    </body>
+</html>

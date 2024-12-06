@@ -33,7 +33,7 @@ public class User {
     )
     private Collection<Role> roles;
     
-    @OneToMany(targetEntity = Image.class, cascade = CascadeType.ALL, mappedBy = "user",fetch = FetchType.EAGER)
+    @OneToMany(targetEntity = Image.class, mappedBy = "user",fetch = FetchType.EAGER)
     private List<Image> images;
     
     public Long getId() {

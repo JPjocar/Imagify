@@ -9,9 +9,10 @@
                 <img class="icon-item-bar icon-logo" th:src="@{/imgs/logo.png}" alt="">
                 Imagify
             </a>
-            <div class="item-bar">
-                <input type="text" name="buscar" placeholder="&#128269; Busqueda" id="busqueda">
-            </div>
+            <form class="item-bar" method="GET" th:action="@{/images/buscar}">
+                <input type="text" name="busq" placeholder="&#128269; Busqueda" id="busq">
+                <button type="submit" class="hidden">Buscar</button>
+            </form>
             <a class="item-bar" th:href="@{/images/create}">
                 <img class="icon-item-bar" th:src="@{/imgs/usuario.png}" alt="">
             </a>
