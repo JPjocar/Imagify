@@ -14,6 +14,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -38,4 +39,12 @@ public class Category {
     
     @OneToMany(targetEntity = Image.class, cascade = CascadeType.ALL, mappedBy = "category",fetch = FetchType.EAGER)
     private List<Image> images;
+
+    public Category(long l, String category_1) {
+        this.id = id;
+        this.name = name;
+        this.description = null; 
+        this.creation_date = LocalDate.now(); 
+        this.images = new ArrayList<>();
+    }
 }
