@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService {
         if (!UserValidator.isValidEmail(registerDTO.getEmail())) {
             throw new IllegalArgumentException("Email no válido.");
         }
-        if (!UserValidator.isValidPassword(registerDTO.getEmail())) {
+        if (!UserValidator.isValidPassword(registerDTO.getPassword())) {
             throw new IllegalArgumentException("La contraseña debe ser alfanumérica y tener al menos 8 caracteres.");
         }
 
@@ -111,14 +111,14 @@ public class UserServiceImpl implements UserService {
         }
 
         Object principal = authentication.getPrincipal();
-        if (principal instanceof UserDetails) {
-            String username = ((UserDetails) principal).getUsername();
+        if (principal instanceof User) {
+            String username = ((User) principal).getNombre();
             // Buscar el usuario por su nombre de usuario para obtener el ID
-            User user = userRepository.findByUsername(username)
+            User user = userRepository.findByNombre(username)
                     .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado"));
             return user.getId();
         } else {
-            throw new IllegalStateException("El principal no es de tipo UserDetails");
+            throw new IllegalStateException("El principal no es de tipo User");
         }
     }
 

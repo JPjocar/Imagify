@@ -32,10 +32,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                         
             <div class="gallery" style="margin-top: 50px">
                 <div th:each="image : ${images}">
-                    <img class="img item-img" th:src="@{../images/resources/{filename}(filename=${image.filename})}" alt="">
+                    <img class="img item-img" th:src="@{/images/resources/{filename}(filename=${image.filename})}" alt="">
                     <div class="info-image hidden" th:data-id="${image.id}">
                         <h1 th:text="${image.title}"></h1>
                         <p th:text="${image.description}"></p>
+                        <p class="category" th:text="${image.category.name}"></p>
                     </div>
                 </div>
             </div>
@@ -58,7 +59,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                             <p class="description">
 
                             </p>
-                            
+                            <div>Categoria: 
+                                <p class="category">
+                                </p>
+                            </div>
                             
                             <button id="btnHide"><a href="#" id="hideImage">Ocultar</a></button>
                             <button id="btnShow"><a href="#" id="showImage">Publicar</a></button>

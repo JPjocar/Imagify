@@ -20,5 +20,5 @@ public interface UserRepository extends JpaRepository<User,Long> {
      * @return El usuario con el correo electrónico especificado, o null si no se encuentra.
      */
     public User findByEmail(String email);
-    Optional<User> findByUsername(String username);
+    Optional <User> findByNombre (String nombre);
 }

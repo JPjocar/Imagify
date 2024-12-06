@@ -1,12 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.example.Imagify.Controller;
 
+import com.example.Imagify.Entity.Category;
 import com.example.Imagify.Entity.Image;
 import com.example.Imagify.Repository.ImageRepository;
 import com.example.Imagify.Repository.UserRepository;
+import com.example.Imagify.Service.CategoryService;
 import com.example.Imagify.Service.ImageService;
 import com.example.Imagify.Service.StorageService;
 import java.util.List;
@@ -49,6 +48,8 @@ public class ImageController {
     @Autowired
     private UserRepository userRepository;
     
+    @Autowired
+    private CategoryService categoryService;
     
     @Autowired
     private StorageService storageService;
@@ -83,7 +84,8 @@ public class ImageController {
     public String create(Model model){
         String username = getCurrentUsername();
         model.addAttribute("username", username);
-
+        List<Category> categories = this.categoryService.getAll();
+        model.addAttribute("categories", categories);
         Image image = new Image();
         model.addAttribute("image", image);
         return "View/Images/create";
@@ -188,5 +190,21 @@ public class ImageController {
         this.imageService.delete(id);
         logger.info("Se ha eliminado una imagen con filename={}", filename);
         return "redirect:/images";
+    }
+    
+    @GetMapping("/categories")
+    public String categories(Model model){
+        List<Category> categories = this.categoryService.getAll();
+        model.addAttribute("categories", categories);
+        return "View/Images/categories";
+    }
+    
+    @GetMapping("/categories/{id}")
+    public String imagesByCategory(@PathVariable("id") Long id, Model model){
+        List<Image> imagesCategory = this.categoryService.get(id).getImages();
+        model.addAttribute("images", imagesCategory);
+        String username = getCurrentUsername();
+        model.addAttribute("username", username);
+        return "View/Images/private";
     }
 }
