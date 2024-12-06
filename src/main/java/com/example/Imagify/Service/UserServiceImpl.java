@@ -54,9 +54,9 @@ public class UserServiceImpl implements UserService {
         if (!UserValidator.isValidEmail(registerDTO.getEmail())) {
             throw new IllegalArgumentException("Email no válido.");
         }
-        if (!UserValidator.isValidPassword(registerDTO.getEmail())) {
-            throw new IllegalArgumentException("La contraseña debe ser alfanumérica y tener al menos 8 caracteres.");
-        }
+//        if (!UserValidator.isValidPassword(registerDTO.getEmail())) {
+//            throw new IllegalArgumentException("La contraseña debe ser alfanumérica y tener al menos 8 caracteres.");
+//        }
         
         User user = new User(
                 registerDTO.getNombre(),
@@ -96,5 +96,63 @@ public class UserServiceImpl implements UserService {
                 .map(role -> new SimpleGrantedAuthority(role.getNombre()))
                 .collect(Collectors.toList());
     }
+<<<<<<< Updated upstream
+=======
+    
+    
+    
+    
+    
+     public Long getCurrentUserId() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null || !authentication.isAuthenticated()) {
+            throw new IllegalStateException("No hay un usuario autenticado");
+        }
+
+        Object principal = authentication.getPrincipal();
+        if (principal instanceof UserDetails) {
+            String username = ((UserDetails) principal).getUsername();
+            // Buscar el usuario por su nombre de usuario para obtener el ID
+            User user = userRepository.findByNombre(username)
+                    .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado"));
+            return user.getId();
+        } else {
+            throw new IllegalStateException("El principal no es de tipo UserDetails");
+        }
+    }
+
+    @Override
+    public UserRegisterDTO getCurrentUserDTO() {
+        Long currentUserId = getCurrentUserId();
+        User currentUser = userRepository.findById(currentUserId)
+                .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado"));
+        return new UserRegisterDTO(
+                currentUser.getId(),
+                currentUser.getNombre(),
+                currentUser.getEmail(),
+                "" 
+        );
+    }
+
+    @Override
+    public User update(UserRegisterDTO registerDTO) {
+        if (registerDTO == null) {
+            throw new IllegalArgumentException("El DTO no puede ser nulo");
+        }
+        if (!isValidEmail(registerDTO.getEmail())) {
+            throw new IllegalArgumentException("Email no válido");
+        }
+        User currentUser = userRepository.findById(getCurrentUserId())
+                .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado"));
+        currentUser.setNombre(registerDTO.getNombre());
+        currentUser.setEmail(registerDTO.getEmail());
+        userRepository.save(currentUser);
+        return null;
+    }
+
+    private boolean isValidEmail(String email) {
+        return email != null && email.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
+    }
+>>>>>>> Stashed changes
 
 }

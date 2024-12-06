@@ -36,6 +36,15 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                     <div class="info-image hidden" th:data-id="${image.id}">
                         <h1 th:text="${image.title}"></h1>
                         <p th:text="${image.description}"></p>
+<<<<<<< Updated upstream
+=======
+                        <p class="category" th:text="${image.category.name}"></p>
+                        <div class="tags">
+                            <ul>
+                                <li th:each="tag : ${image.tags}" th:text="${tag.name}"></li>
+                            </ul>
+                        </div>
+>>>>>>> Stashed changes
                     </div>
                 </div>
             </div>
@@ -58,8 +67,19 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                             <p class="description">
 
                             </p>
+<<<<<<< Updated upstream
                             
                             
+=======
+                            <div>Categoria: 
+                                <p class="category">
+                                </p>
+                            </div>
+                            <div>Etiquetas: 
+                                <p class="tags">
+                                </p>
+                            </div>
+>>>>>>> Stashed changes
                             <button id="btnHide"><a href="#" id="hideImage">Ocultar</a></button>
                             <button id="btnShow"><a href="#" id="showImage">Publicar</a></button>
                             <button id="btnDelete"><a href="#" id="deleteImage">Eliminar</a></button>  

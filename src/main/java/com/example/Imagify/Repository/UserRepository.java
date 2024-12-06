@@ -2,6 +2,7 @@ package com.example.Imagify.Repository;
 
 import com.example.Imagify.Model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -19,5 +20,10 @@ public interface UserRepository extends JpaRepository<User,Long> {
      * @return El usuario con el correo electrónico especificado, o null si no se encuentra.
      */
     public User findByEmail(String email);
+<<<<<<< Updated upstream
+=======
+    
+    Optional<User> findByNombre(String username);
+>>>>>>> Stashed changes
 
 }

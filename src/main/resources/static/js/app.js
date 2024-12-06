@@ -18,6 +18,11 @@ function leeDatos(imagenDetalles){
     id: imagenDetalles.getAttribute("data-id"),
     titulo: imagenDetalles.querySelector("h1").textContent,
     descripcion: imagenDetalles.querySelector("p").textContent,
+<<<<<<< Updated upstream
+=======
+    category: imagenDetalles.querySelector(".category").textContent,
+    tags: imagenDetalles.querySelector(".tags").innerHTML,
+>>>>>>> Stashed changes
     src: imagenDetalles.previousElementSibling.src
   }
   imagenHTML(imgInfo);
@@ -27,7 +32,12 @@ function imagenHTML(img){
   modal_container.querySelector(".title").textContent = img.titulo;
   modal_container.querySelector(".description").textContent = img.descripcion;
   modal_container.querySelector(".show-img").src = img.src;
+<<<<<<< Updated upstream
 
+=======
+  modal_container.querySelector(".category").textContent = img.category;
+  modal_container.querySelector(".tags").innerHTML = img.tags;
+>>>>>>> Stashed changes
   modal_container.querySelector("#deleteImage").href = `http://localhost:8080/images/${img.id}/delete`;
   modal_container.querySelector("#hideImage").href = `http://localhost:8080/images/${img.id}/hide`;
   modal_container.querySelector("#showImage").href = `http://localhost:8080/images/${img.id}/show`;

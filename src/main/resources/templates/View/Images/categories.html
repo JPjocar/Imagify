@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/css/normalize.css">
+        <link rel="stylesheet" href="/css/styles.css">
+        <link rel="stylesheet" href="/css/styleU.css">
+        <link rel="stylesheet" href="/css/stylesbl.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">  
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+        <title>Imagify</title>
+        <link rel="icon" type="image/x-icon" href="/imgs/logo.png">
+    </head>
+    <body>
+        <div th:replace="fragments/header :: header"></div>
+
+        
+        
+        <div id="content">
+            
+            <div class="info-user">
+                <img src="/imgs/usuario.png">
+                <h1 th:text="${username}"></h1>
+            </div>
+
+            <div th:replace="fragments/nav-user :: nav-user"></div>
+
+            <div class="galeria box-galeria">
+                <div class="info">
+                    <h2 class="title">My Categories</h2> 
+                </div>
+                <!--FOTOS-->
+                <div class="grid-galeria">
+                    <a class="galeria gitem" th:each="category : ${categories}" style="display: block" th:href="@{/images/categories/{id}(id=${category.id})}">
+                        <div class="foto">
+                            <img src="" alt="">
+                        </div>
+                        <div class="pie">
+                            <p class="title-item" th:text="${category.name}"></p> 
+                        </div>
+                    </a>
+                </div>  
+            </div>
+        </div>
+
+    </body>
+</html>
+
+

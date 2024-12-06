@@ -99,6 +99,7 @@ public abstract class ImageService implements CRUDImageService, UploadImageServi
         if (authentication != null && authentication.getPrincipal() instanceof User) {
             username = ((User) authentication.getPrincipal()).getUsername();
         }
+        System.out.println(username);
         return this.userRepository.findByEmail(username).getId();
     }
     /**
@@ -109,5 +110,10 @@ public abstract class ImageService implements CRUDImageService, UploadImageServi
     @Override
     public void delete(Long id){
         this.imageRepository.deleteById(id);
+    }
+    
+    
+    public List<Image> search(String busqueda){
+        return this.imageRepository.search(busqueda);
     }
 }
