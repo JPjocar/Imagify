@@ -3,6 +3,7 @@ package com.example.Imagify.Repository;
 import com.example.Imagify.Model.User;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 /**

@@ -62,9 +62,17 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                         </label>
                     </div>
                     <div class="form-group">
+                        <label>Category: </label>
                         <select name="select" th:field="*{category}">
                                 <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
                         </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Tags: </label> 
+                        <div th:each="tag : ${tags}"> 
+                            <input type="checkbox" th:value="${tag.id}" th:field="*{tags}" /> 
+                            <span th:text="${tag.name}"></span> 
+                        </div>
                     </div>
                     <button type="submit">Save</button>
                 </form>

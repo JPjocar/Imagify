@@ -21,39 +21,19 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- * Representa la tabla images almacenada en la base de datos.
- * @author Jocar
- * @version 1.0
- * @since 1.1
- */
- 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "images")
-public class Image {
+@Table(name = "tags")
+
+public class Tag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String filename;
-    private String title;
-    private String description;
-    private String url;
-    private LocalDate upload_date;
+    private String name;
+
+    private LocalDate creation_date;
     
-    private String visibility;
-    
-    @ManyToOne(targetEntity = User.class, fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
-    private User user;
-    
-    @ManyToOne(targetEntity = Category.class, fetch = FetchType.EAGER)
-    @JoinColumn(name = "category_id")
-    private Category category;
-   
-    @ManyToMany(targetEntity = Tag.class, fetch = FetchType.LAZY)
-    private List<Tag> tags;
     
 }

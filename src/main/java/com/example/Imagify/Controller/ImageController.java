@@ -1,15 +1,20 @@
-
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package com.example.Imagify.Controller;
 
+
+import com.example.Imagify.DTO.UserRegisterDTO;
 import com.example.Imagify.Entity.Category;
 import com.example.Imagify.Entity.Image;
-import com.example.Imagify.Repository.ImageRepository;
+import com.example.Imagify.Entity.Tag;
 import com.example.Imagify.Repository.UserRepository;
 import com.example.Imagify.Service.CategoryService;
 import com.example.Imagify.Service.ImageService;
 import com.example.Imagify.Service.StorageService;
-import java.util.List;
-import java.util.Optional;
+import com.example.Imagify.Service.TagService;
+import com.example.Imagify.Service.UserService;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,13 +26,17 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+
+import org.springframework.web.bind.annotation.PathVariable;
+
+import org.springframework.web.bind.annotation.GetMapping;
+
+import java.util.List;
 
 /**
  * Esta clase administra la solicitudes HTPP de las imagenes
@@ -49,10 +58,16 @@ public class ImageController {
     private UserRepository userRepository;
     
     @Autowired
+    private UserService userService;
+    
+    @Autowired
     private CategoryService categoryService;
     
     @Autowired
     private StorageService storageService;
+    
+    @Autowired
+    private TagService tagService;
      
     /**
      * Este metodo sirve para mostrar la lista de imagenes
@@ -66,10 +81,40 @@ public class ImageController {
 //        logger.info("Accediendo a la pagina principal");
 //        return "View/Images/index";
 //    }
+    
+    @GetMapping("/buscar")
+    public String buscador(@RequestParam("busq") String busq, Model model){
+        System.out.println(busq);
+        List<Image> images = this.imageService.search(busq);
+        model.addAttribute("images", images);
+        model.addAttribute("buscar", true);
+        model.addAttribute("busqueda", busq);
+        return "View/Images/index";
+    }
+    
+    @GetMapping("/tags/create")
+    public String tags(Model model){
+        Tag tag = new Tag();
+        model.addAttribute("tag", tag);
+        String username = getCurrentUsername();
+        model.addAttribute("username", username);
+        List<Tag> tags = this.tagService.getAllDes();
+        model.addAttribute("tags", tags);
+        return "View/Images/tags";
+    }
+    
+    @PostMapping("/tags")
+    public String createTag(@ModelAttribute("tag") Tag tag){
+        this.tagService.save(tag);
+        return "redirect:/images/tags/create";
+    }
+    
     @GetMapping
     public String index(Model model){
         List<Image> images = this.imageService.getAllPublicImages();
         model.addAttribute("images", images);
+        model.addAttribute("buscar", false);
+        model.addAttribute("busqueda", "");
         logger.info("Accediendo a la pagina principal");
         return "View/Images/index";
     }
@@ -86,6 +131,8 @@ public class ImageController {
         model.addAttribute("username", username);
         List<Category> categories = this.categoryService.getAll();
         model.addAttribute("categories", categories);
+        List<Tag> tags = this.tagService.getAll();
+        model.addAttribute("tags", tags);
         Image image = new Image();
         model.addAttribute("image", image);
         return "View/Images/create";
@@ -164,7 +211,7 @@ public class ImageController {
      * @throws Exception Si ocurre un error durante el proceso de almacenamiento de la imagen.
      */
     @PostMapping
-    public String store(@ModelAttribute("image") Image image, @RequestParam("imageFile") MultipartFile imageFile) throws Exception{
+    public String store(@ModelAttribute("image") Image image, @RequestParam("imageFile") MultipartFile imageFile, @RequestParam List<Long> tags) throws Exception{
         String username = "";
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null && authentication.getPrincipal() instanceof User) {
@@ -172,6 +219,9 @@ public class ImageController {
         }
         com.example.Imagify.Model.User user = this.userRepository.findByEmail(username);
         image.setUser(user);
+        List<Tag> tagsDB = this.tagService.findAllById(tags);
+        image.setTags(tagsDB);
+        
         long start = System.currentTimeMillis();
         this.imageService.save(image, imageFile);
         long totalTime = System.currentTimeMillis() - start;
@@ -205,6 +255,40 @@ public class ImageController {
         model.addAttribute("images", imagesCategory);
         String username = getCurrentUsername();
         model.addAttribute("username", username);
-        return "View/Images/private";
+        return "View/Images/private"; 
     }
+    
+    
+    @GetMapping("/perfil/edit")
+    
+    public String perfilEdit(Model model) {
+        String username1 = "";
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.getPrincipal() instanceof User) {
+            username1 = ((User) authentication.getPrincipal()).getUsername();
+        }
+        String username = getCurrentUsername();
+        model.addAttribute("username", username);
+        com.example.Imagify.Model.User user = this.userRepository.findByEmail(username1);
+        UserRegisterDTO userRegisterDTO = new UserRegisterDTO(user.getId(), user.getNombre(), user.getEmail(), "");
+        model.addAttribute("user", userRegisterDTO);
+        return "View/Images/edit"; 
+    }
+    
+    @PostMapping("/perfil/update")
+    public String perfilUpdate(@ModelAttribute("user") UserRegisterDTO userRegisterDTO){
+        String username = "";
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.getPrincipal() instanceof User) {
+            username = ((User) authentication.getPrincipal()).getUsername();
+        }
+        com.example.Imagify.Model.User user = this.userRepository.findByEmail(username);
+
+        userRegisterDTO.setId(user.getId());
+        System.out.println(userRegisterDTO.getNombre());
+        this.userRepository.deleteById(user.getId());
+        this.userService.save(userRegisterDTO);
+        return "redirect:/images/perfil/edit";
+    }
+    
 }

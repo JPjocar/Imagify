@@ -43,4 +43,6 @@ public interface ImageRepository extends JpaRepository<Image, Long>{
     @Query("SELECT u FROM Image u")
     public List<ImageBasicDetails> getImagesDetailsById();
     
+    @Query("SELECT u FROM Image u WHERE u.title LIKE %:busq% OR u.description LIKE %:busq% ")
+    public List<Image> search(@Param("busq") String busq);
 }

@@ -37,6 +37,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                         <h1 th:text="${image.title}"></h1>
                         <p th:text="${image.description}"></p>
                         <p class="category" th:text="${image.category.name}"></p>
+                        <div class="tags">
+                            <ul>
+                                <li th:each="tag : ${image.tags}" th:text="${tag.name}"></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -63,7 +68,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                                 <p class="category">
                                 </p>
                             </div>
-                            
+                            <div>Etiquetas: 
+                                <p class="tags">
+                                </p>
+                            </div>
                             <button id="btnHide"><a href="#" id="hideImage">Ocultar</a></button>
                             <button id="btnShow"><a href="#" id="showImage">Publicar</a></button>
                             <button id="btnDelete"><a href="#" id="deleteImage">Eliminar</a></button>  

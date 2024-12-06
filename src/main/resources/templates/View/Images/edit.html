@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/css/normalize.css">
+        <link rel="stylesheet" href="/css/styles.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">  
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+        <title>Imagify</title>
+        <link rel="icon" type="image/x-icon" href="/imgs/logo.png">
+    </head>
+    <body>
+        
+        <div th:replace="fragments/header :: header"></div>
+
+        
+        
+        <div id="content">
+            
+            <div class="info-user">
+                <img src="/imgs/usuario.png">
+                <h1 th:text="${username}"></h1>
+            </div>
+            
+            <div th:replace="fragments/nav-user :: nav-user"></div>
+            
+            <div class="form-content">
+                <form th:action="@{/images/perfil/update}" th:object="${user}" method="POST" enctype="multipart/form-data" id="form-create-image">
+                    <div class="form-group">
+                        <h1>Update Profile</h1>
+                        <img th:src="@{/imgs/logo.png}" alt="" class="form-logo">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="title" placeholder="Enter a new username" th:field="*{nombre}">
+                        <p class="message-error hidden"></p>
+                    </div>
+                    <div class="form-group hidden">
+                        <input type="text" id="description" placeholder="Enter a new description" th:field="*{email}">
+                        <p class="message-error hidden"></p>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="description" placeholder="Enter a new password" th:field="*{password}">
+                        <p class="message-error hidden"></p>
+                    </div>
+                    <button type="submit">Update</button>
+                </form>
+            </div>
+        </div>
+        
+        
+    </body>
+</html>

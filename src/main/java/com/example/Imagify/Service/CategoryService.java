@@ -1,3 +1,4 @@
+
 package com.example.Imagify.Service;
 
 import com.example.Imagify.Entity.Category;
@@ -19,4 +20,6 @@ public class CategoryService {
     public Category get(Long id){
         return this.categoryRepository.findById(id).get();
     }
+    
+
 }

@@ -2,6 +2,7 @@
 package com.example.Imagify.Controller;
 
 import com.example.Imagify.DTO.UserRegisterDTO;
+import com.example.Imagify.Repository.UserRepository;
 import com.example.Imagify.Service.UserService;
 
 import javax.validation.Valid;
@@ -9,6 +10,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,11 +29,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Slf4j
 
 @Controller
-@RequestMapping("/profile")
+@RequestMapping(path = "perfil")
 public class EditProfileController {
 
     private final UserService userService;
 
+    @Autowired
+    private UserRepository userRepository;
+    
     public EditProfileController(UserService userService) {
         this.userService = userService;
     }
@@ -35,11 +44,13 @@ public class EditProfileController {
     @GetMapping("/edit")
     public String showEditProfileForm(Model model) {
 
+
         log.info("Mostrando formulario de editar perfil");
 
         UserRegisterDTO currentUserDTO = userService.getCurrentUserDTO();
         model.addAttribute("user", currentUserDTO);
-        return "View/Images/categories"; 
+        System.out.println("ASDASDASDAS");
+        return "View/Images/edit"; 
     }
 
     @PostMapping("/edit")
@@ -64,5 +75,14 @@ public class EditProfileController {
         
         return "View/Images/categories";
     }
+}
+    
+    @PostMapping("/update")
+    public String update(@ModelAttribute("user") UserRegisterDTO userDTO){
+        this.userService.save(userDTO);
+        return "redirect:/profile/update";
+    }
+
+    
 }
 
